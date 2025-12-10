@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price List - Simulasi UTBK Premium 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #00B7B5 0%, #005461 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .discount-banner {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
+            padding: 12px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+        }
+
+        .price-card.featured {
+            border: 3px solid #ffd700;
+            transform: scale(1.05);
+        }
+
+        .price-card.featured::before {
+            content: '\2B50 PALING LARIS';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .price-card.featured .card-header {
+            margin-top: 30px;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .package-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .package-title {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .package-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .price-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 5px;
+        }
+
+        .current-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .price-per-access {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '\2705';
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .contact-item strong {
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: scale(1);
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>&#127891; Simulasi UTBK Premium 2026</h1>
+            <p class="subtitle">Lisensi Institusional untuk Lembaga Pendidikan</p>
+            <div class="discount-banner">
+                &#128165; DISKON HINGGA 89% - Harga Normal Rp 300.000/akses
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- BRONZE -->
+            <div class="price-card">
+                <div class="card-header">
+                    <div class="package-name">Paket Bronze</div>
+                    <div class="package-title">BRONZE</div>
+                    <div class="package-subtitle">10 Akses</div>
+                </div>
+                <div class="price-section">
+                    <div class="original-price">Rp 3.000.000</div>
+                    <div class="current-price">Rp 420K</div>
+                    <div class="price-per-access">Rp 42.000/akses</div>
+                    <div class="discount-badge">HEMAT 86%</div>
+                </div>
+                <ul class="features-list">
+                    <li>10 Akses Simulasi UTBK Premium</li>
+                    <li>Pembahasan soal otomatis</li>
+                    <li>Laporan hasil sederhana</li>
+                    <li>Panduan instalasi & dokumentasi</li>
+                    <li>Lisensi selamanya (perpetual)</li>
+                    <li>Support teknis via email/WA</li>
+                </ul>
+                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Bronze*%20(10%20akses%20-%20Rp%20420K).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
+            </div>
+
+            <!-- SILVER -->
+            <div class="price-card featured">
+                <div class="card-header">
+                    <div class="package-name">Paket Silver</div>
+                    <div class="package-title">SILVER</div>
+                    <div class="package-subtitle">25 Akses - Ideal untuk 1 Kelas</div>
+                </div>
+                <div class="price-section">
+                    <div class="original-price">Rp 7.500.000</div>
+                    <div class="current-price">Rp 1 JT</div>
+                    <div class="price-per-access">Rp 40.000/akses</div>
+                    <div class="discount-badge">HEMAT 87%</div>
+                </div>
+                <ul class="features-list">
+                    <li>Semua fitur Paket Bronze</li>
+                    <li><strong>Dashboard Admin/Guru</strong>  (monitoring semua siswa)</li>
+                    <li><strong>Video tutorial</strong>  penggunaan</li>
+                </ul>
+                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Silver*%20(25%20akses%20-%20Rp%201%20Juta)%20-%20PALING%20LARIS!%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
+            </div>
+
+            <!-- GOLD -->
+            <div class="price-card">
+                <div class="card-header">
+                    <div class="package-name">Paket Gold</div>
+                    <div class="package-title">GOLD</div>
+                    <div class="package-subtitle">50 Akses - Ideal untuk 1-2 Kelas</div>
+                </div>
+                <div class="price-section">
+                    <div class="original-price">Rp 15.000.000</div>
+                    <div class="current-price">Rp 1,9 JT</div>
+                    <div class="price-per-access">Rp 38.000/akses</div>
+                    <div class="discount-badge">HEMAT 87%</div>
+                </div>
+                <ul class="features-list">
+                    <li>Semua fitur Paket Silver</li>
+                    <li><strong>Custom Branding</strong>  (logo sekolah)</li>
+                    <li><strong>Template Sertifikat Digital</strong>  (Plus panduan)</li>
+                    <li><strong>Konsultasi 1x</strong>  (60 menit via Zoom)</li>
+                    <li><strong>Priority support</strong>  (response lebih cepat)</li>
+                </ul>
+                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Gold*%20(50%20akses%20-%20Rp%201%2C9%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
+            </div>
+
+            <!-- PLATINUM -->
+            <div class="price-card">
+                <div class="card-header">
+                    <div class="package-name">Paket Platinum</div>
+                    <div class="package-title">PLATINUM</div>
+                    <div class="package-subtitle">75 Akses - Ideal untuk Angkatan</div>
+                </div>
+                <div class="price-section">
+                    <div class="original-price">Rp 22.500.000</div>
+                    <div class="current-price">Rp 2,6 JT</div>
+                    <div class="price-per-access">Rp 35.000/akses</div>
+                    <div class="discount-badge">HEMAT 88%</div>
+                </div>
+                <ul class="features-list">
+                    <li>Semua fitur Paket Gold</li>
+                    <li><strong>Sertifikat Digital Full Service</strong>  (kami yang generate)</li>
+                    <li><strong>Konsultasi 2x</strong>  (60 menit/sesi)</li>
+                    <li><strong>Training Penggunaan</strong>  (90 menit via zoom)</li>
+                    <li><strong>Grup WA prioritas</strong>  (fast response)</li>
+                    <li><strong>Remote installation assistance</strong></li>
+                </ul>
+                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Platinum*%20(75%20akses%20-%20Rp%202%2C6%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
+            </div>
+
+            <!-- DIAMOND -->
+            <div class="price-card">
+                <div class="card-header">
+                    <div class="package-name">Paket Diamond</div>
+                    <div class="package-title">&#128142; DIAMOND</div>
+                    <div class="package-subtitle">100 Akses - Paket Terlengkap</div>
+                </div>
+                <div class="price-section">
+                    <div class="original-price">Rp 30.000.000</div>
+                    <div class="current-price">Rp 3,3 JT</div>
+                    <div class="price-per-access">Rp 33.000/akses</div>
+                    <div class="discount-badge">HEMAT 89%</div>
+                </div>
+                <ul class="features-list">
+                    <li>Semua fitur Paket Platinum</li>
+                    <li><strong>Konsultasi 3x per bulan</strong>  (via Zoom)*</li>
+                    <li><strong>Dedicated WhatsApp support</strong>  (admin khusus)</li>
+                    <li><strong>On-site installation support</strong>  (Surabaya/sekitar)**</li>
+                </ul>
+                <div style="font-size: 11px; color: #888; margin: 15px 0; line-height: 1.4;">
+                    *Konsultasi tambahan: Rp 150k/sesi<br>
+                    **atau remote assistance jika di luar kota
+                </div>
+                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Diamond*%20(100%20akses%20-%20Rp%203%2C3%20Juta)%20-%20Paket%20Terlengkap!%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3 style="margin-bottom: 20px;">&#128222; Hubungi Kami untuk Informasi & Pemesanan</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>&#128231;</span>
+                    <span><strong>Email:</strong> belajarcodestudio@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>&#128172;</span>
+                    <span><strong>WhatsApp:</strong> +62 851 3592 1324</span>
+                </div>
+            </div>
+            <p style="margin-top: 25px; font-size: 14px; opacity: 0.9;">
+                &#128205; Surabaya, Indonesia | &#9200; Senin-Jumat, 08.00-17.00 WIB
+            </p>
+            <p style="margin-top: 15px; font-size: 13px; opacity: 0.8;">
+                Belajar Code Studio - Simulasi UTBK Premium 2026
+            </p>
+        </div>
+    </div>
+</body>
+</html>
