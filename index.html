@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price List - Simulasi UTBK Premium 2026</title>
+    <title>Price List - Simulasi UTBK Premium 2026 | Studio Belajar.co</title>
     <style>
         * {
             margin: 0;
@@ -12,10 +12,35 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #00B7B5 0%, #005461 100%);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             padding: 40px 20px;
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* Watermark Logo */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .watermark span {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .container {
@@ -26,30 +51,44 @@
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+        }
+
+.brand-logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .brand-logo span {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header h1 {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .header .subtitle {
-            font-size: 20px;
-            opacity: 0.95;
-            margin-bottom: 15px;
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+            font-weight: 300;
         }
 
         .discount-banner {
-            background: linear-gradient(90deg, #ff6b6b, #ee5a6f);
-            padding: 12px 30px;
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            padding: 14px 35px;
             border-radius: 50px;
             display: inline-block;
             font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
             animation: pulse 2s infinite;
         }
 
@@ -60,151 +99,314 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
         }
 
-        @media (max-width: 1200px) {
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
+        /* Collapsed State */
         .price-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
+        /* Bronze Theme */
+        .price-card.bronze {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.15), rgba(139, 69, 19, 0.1));
+            border: 1px solid rgba(205, 127, 50, 0.3);
+        }
+
+        .price-card.bronze:hover {
+            border-color: rgba(205, 127, 50, 0.6);
+            box-shadow: 0 20px 60px rgba(205, 127, 50, 0.3);
+        }
+
+        .price-card.bronze .package-title,
+        .price-card.bronze .mini-price {
+            color: #cd7f32;
+        }
+
+        .price-card.bronze.expanded {
+            border-color: rgba(205, 127, 50, 0.6);
+        }
+
+        /* Silver Theme */
+        .price-card.silver {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.15), rgba(169, 169, 169, 0.1));
+            border: 1px solid rgba(192, 192, 192, 0.3);
+        }
+
+        .price-card.silver:hover {
+            border-color: rgba(192, 192, 192, 0.6);
+            box-shadow: 0 20px 60px rgba(192, 192, 192, 0.3);
+        }
+
+        .price-card.silver .package-title,
+        .price-card.silver .mini-price {
+            color: #C0C0C0;
+        }
+
+        .price-card.silver.expanded {
+            border-color: rgba(192, 192, 192, 0.6);
+        }
+
+        /* Gold Theme */
+        .price-card.gold {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .price-card.gold:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .price-card.gold .package-title,
+        .price-card.gold .mini-price {
+            color: #FFD700;
+        }
+
+        .price-card.gold.expanded {
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Platinum Theme */
+        .price-card.platinum {
+            background: linear-gradient(135deg, rgba(229, 228, 226, 0.15), rgba(184, 212, 232, 0.1));
+            border: 1px solid rgba(229, 228, 226, 0.3);
+        }
+
+        .price-card.platinum:hover {
+            border-color: rgba(229, 228, 226, 0.6);
+            box-shadow: 0 20px 60px rgba(184, 212, 232, 0.3);
+        }
+
+        .price-card.platinum .package-title,
+        .price-card.platinum .mini-price {
+            color: #E5E4E2;
+        }
+
+        .price-card.platinum.expanded {
+            border-color: rgba(229, 228, 226, 0.6);
+        }
+
+        /* Diamond Theme */
+        .price-card.diamond {
+            background: linear-gradient(135deg, rgba(0, 206, 209, 0.15), rgba(77, 208, 225, 0.1));
+            border: 1px solid rgba(0, 206, 209, 0.3);
+        }
+
+        .price-card.diamond:hover {
+            border-color: rgba(0, 206, 209, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 206, 209, 0.3);
+        }
+
+        .price-card.diamond .package-title,
+        .price-card.diamond .mini-price {
+            color: #00CED1;
+        }
+
+        .price-card.diamond.expanded {
+            border-color: rgba(0, 206, 209, 0.6);
+        }
+
         .price-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+            transform: translateY(-5px);
         }
 
         .price-card.featured {
-            border: 3px solid #ffd700;
-            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
+            border: 2px solid rgba(251, 191, 36, 0.4);
         }
 
-        .price-card.featured::before {
+        .price-card.featured::after {
             content: '\2B50 PALING LARIS';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            color: #333;
-            padding: 8px;
+            top: 15px;
+            right: -35px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            color: #000;
+            padding: 5px 40px;
+            font-size: 11px;
             font-weight: 700;
-            font-size: 14px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Expanded State */
+        .price-card.expanded {
+            grid-column: 1 / -1;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+        }
+
+        .card-mini {
             text-align: center;
         }
 
-        .price-card.featured .card-header {
-            margin-top: 30px;
-        }
-
-        .card-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .package-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .package-title {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        .package-subtitle {
-            font-size: 13px;
-            color: #888;
+        .card-mini .package-icon {
+            font-size: 48px;
             margin-bottom: 15px;
         }
 
+        .card-mini .package-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .card-mini .package-access {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .card-mini .mini-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-top: 15px;
+        }
+
+        /* Expanded Content */
+        .card-full {
+            display: none;
+        }
+
+        .price-card.expanded .card-mini {
+            display: none;
+        }
+
+        .price-card.expanded .card-full {
+            display: block;
+        }
+
+        .full-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .full-header-left h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .full-header-left p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
         .price-section {
-            text-align: center;
-            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .price-section .main-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .price-details {
+            flex: 1;
         }
 
         .original-price {
             font-size: 16px;
-            color: #999;
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: line-through;
-            margin-bottom: 5px;
-        }
-
-        .current-price {
-            font-size: 36px;
-            font-weight: 700;
-            color: #333;
             margin-bottom: 5px;
         }
 
         .price-per-access {
             font-size: 14px;
-            color: #666;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .discount-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
             font-weight: 700;
-            margin-top: 10px;
         }
 
         .features-list {
             list-style: none;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
         }
 
         .features-list li {
-            padding: 10px 0;
+            padding: 12px 15px;
             font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-            border-bottom: 1px solid #f0f0f0;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            align-items: flex-start;
-        }
-
-        .features-list li:last-child {
-            border-bottom: none;
+            align-items: center;
+            gap: 10px;
         }
 
         .features-list li::before {
             content: '\2705';
-            margin-right: 10px;
-            flex-shrink: 0;
+            color: #60a5fa;
+            font-weight: 700;
+            font-size: 18px;
         }
 
         .cta-button {
             width: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 18px;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
@@ -219,16 +421,17 @@
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(96, 165, 250, 0.4);
         }
 
         .footer {
             text-align: center;
             color: white;
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(255,255,255,0.1);
+            margin-top: 80px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
 
@@ -237,167 +440,246 @@
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 16px;
-        }
-
-        .contact-item strong {
-            font-weight: 600;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 32px;
             }
-            
+
             .pricing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .price-card.expanded {
+                padding: 25px;
+            }
+
+            .full-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .features-list {
                 grid-template-columns: 1fr;
             }
 
-            .price-card.featured {
-                transform: scale(1);
-            }
-
-            .contact-info {
+            .price-section {
                 flex-direction: column;
-                gap: 15px;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
+    <div class="watermark">
+        Powered by <span>Studio Belajar.co</span>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>&#127891; Simulasi UTBK Premium 2026</h1>
+            <!-- Logo Brand Area - Tambahkan base64 image di sini -->
+            <div class="brand-logo-container" style="margin-bottom: 30px;">
+                <!-- <img src="data:image/png;base64," alt="Studio Belajar.co" style="max-width: 200px; height: auto;"> -->
+            </div>
+               
+                <div class="brand-logo">
+                <span>Studio Belajar.co</span>
+            </div>
+            <h1>Simulasi UTBK Premium 2026</h1>
             <p class="subtitle">Lisensi Institusional untuk Lembaga Pendidikan</p>
             <div class="discount-banner">
-                &#128165; DISKON HINGGA 89% - Harga Normal Rp 300.000/akses
+                &#128293; DISKON HINGGA 89% - Harga Normal Rp 350.000/akses
             </div>
         </div>
 
         <div class="pricing-grid">
             <!-- BRONZE -->
-            <div class="price-card">
-                <div class="card-header">
-                    <div class="package-name">Paket Bronze</div>
+            <div class="price-card bronze" onclick="toggleCard(this)">
+                <div class="card-mini">
+                    <div class="package-icon">📕</div>
                     <div class="package-title">BRONZE</div>
-                    <div class="package-subtitle">10 Akses</div>
+                    <div class="package-access">10 Akses</div>
+                    <div class="mini-price">Rp 470K</div>
                 </div>
-                <div class="price-section">
-                    <div class="original-price">Rp 3.000.000</div>
-                    <div class="current-price">Rp 420K</div>
-                    <div class="price-per-access">Rp 42.000/akses</div>
-                    <div class="discount-badge">HEMAT 86%</div>
+                <div class="card-full">
+                    <div class="full-header">
+                        <div class="full-header-left">
+                            <h2>&#129351; BRONZE</h2>
+                            <p>10 Akses Simulasi</p>
+                        </div>
+                        <button class="close-btn" onclick="event.stopPropagation(); toggleCard(this.closest('.price-card'))">×</button>
+                    </div>
+                    <div class="price-section">
+                        <div class="main-price">Rp 470K</div>
+                        <div class="price-details">
+                            <div class="original-price">Rp 3.500.000</div>
+                            <div class="price-per-access">Rp 47.000/akses</div>
+                        </div>
+                        <div class="discount-badge">HEMAT 86%</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>10 Akses Simulasi UTBK Premium</li>
+                        <li>Pembahasan soal otomatis</li>
+                        <li>Hasil ujian otomatis</li>
+                        <li>Panduan instalasi & penggunaan</li>
+                        <li>Lisensi selamanya (perpetual)</li>
+                        <li>Support teknis via email/WA</li>
+                    </ul>
+                    <a href="https://wa.me/6285135921324?text=Halo%20Studio%20Belajar.co%2C%20saya%20tertarik%20dengan%20*Paket%20Bronze*%20(10%20akses%20-%20Rp%20470K).%20Mohon%20info%20lebih%20lanjut." class="cta-button" onclick="event.stopPropagation()">Pesan Sekarang</a>
                 </div>
-                <ul class="features-list">
-                    <li>10 Akses Simulasi UTBK Premium</li>
-                    <li>Pembahasan soal otomatis</li>
-                    <li>Laporan hasil sederhana</li>
-                    <li>Panduan instalasi & dokumentasi</li>
-                    <li>Lisensi selamanya (perpetual)</li>
-                    <li>Support teknis via email/WA</li>
-                </ul>
-                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Bronze*%20(10%20akses%20-%20Rp%20420K).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
             </div>
 
             <!-- SILVER -->
-            <div class="price-card featured">
-                <div class="card-header">
-                    <div class="package-name">Paket Silver</div>
+            <div class="price-card silver featured" onclick="toggleCard(this)">
+                <div class="card-mini">
+                    <div class="package-icon">🎓</div>
                     <div class="package-title">SILVER</div>
-                    <div class="package-subtitle">25 Akses - Ideal untuk 1 Kelas</div>
+                    <div class="package-access">25 Akses</div>
+                    <div class="mini-price">Rp 1,1 JT</div>
                 </div>
-                <div class="price-section">
-                    <div class="original-price">Rp 7.500.000</div>
-                    <div class="current-price">Rp 1 JT</div>
-                    <div class="price-per-access">Rp 40.000/akses</div>
-                    <div class="discount-badge">HEMAT 87%</div>
+                <div class="card-full">
+                    <div class="full-header">
+                        <div class="full-header-left">
+                            <h2>&#129352; SILVER</h2>
+                            <p>25 Akses - Ideal untuk 1 Kelas</p>
+                        </div>
+                        <button class="close-btn" onclick="event.stopPropagation(); toggleCard(this.closest('.price-card'))">×</button>
+                    </div>
+                    <div class="price-section">
+                        <div class="main-price">Rp 1,1 JT</div>
+                        <div class="price-details">
+                            <div class="original-price">Rp 8.750.000</div>
+                            <div class="price-per-access">Rp 44.000/akses</div>
+                        </div>
+                        <div class="discount-badge">HEMAT 87%</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>Semua fitur Paket Bronze</li>
+                        <li><strong>Dashboard Admin/Guru</strong> (monitoring semua siswa)</li>
+                        <li><strong>Video tutorial</strong> penggunaan</li>
+                    </ul>
+                    <a href="https://wa.me/6285135921324?text=Halo%20Studio%20Belajar.co%2C%20saya%20tertarik%20dengan%20*Paket%20Silver*%20(25%20akses%20-%20Rp%201%2C1%20Juta)%20-%20PALING%20LARIS!%20Mohon%20info%20lebih%20lanjut." class="cta-button" onclick="event.stopPropagation()">Pesan Sekarang</a>
                 </div>
-                <ul class="features-list">
-                    <li>Semua fitur Paket Bronze</li>
-                    <li><strong>Dashboard Admin/Guru</strong>  (monitoring semua siswa)</li>
-                    <li><strong>Video tutorial</strong>  penggunaan</li>
-                </ul>
-                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Silver*%20(25%20akses%20-%20Rp%201%20Juta)%20-%20PALING%20LARIS!%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
             </div>
 
             <!-- GOLD -->
-            <div class="price-card">
-                <div class="card-header">
-                    <div class="package-name">Paket Gold</div>
+            <div class="price-card gold" onclick="toggleCard(this)">
+                <div class="card-mini">
+                    <div class="package-icon">☀️</div>
                     <div class="package-title">GOLD</div>
-                    <div class="package-subtitle">50 Akses - Ideal untuk 1-2 Kelas</div>
+                    <div class="package-access">50 Akses</div>
+                    <div class="mini-price">Rp 2,1 JT</div>
                 </div>
-                <div class="price-section">
-                    <div class="original-price">Rp 15.000.000</div>
-                    <div class="current-price">Rp 1,9 JT</div>
-                    <div class="price-per-access">Rp 38.000/akses</div>
-                    <div class="discount-badge">HEMAT 87%</div>
+                <div class="card-full">
+                    <div class="full-header">
+                        <div class="full-header-left">
+                            <h2>&#129353; GOLD</h2>
+                            <p>50 Akses - Ideal untuk 1-2 Kelas</p>
+                        </div>
+                        <button class="close-btn" onclick="event.stopPropagation(); toggleCard(this.closest('.price-card'))">×</button>
+                    </div>
+                    <div class="price-section">
+                        <div class="main-price">Rp 2,1 JT</div>
+                        <div class="price-details">
+                            <div class="original-price">Rp 17.500.000</div>
+                            <div class="price-per-access">Rp 42.000/akses</div>
+                        </div>
+                        <div class="discount-badge">HEMAT 88%</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>Semua fitur Paket Silver</li>
+                        <li><strong>Custom Branding</strong> (logo sekolah)</li>
+                        <li><strong>Template Sertifikat Digital</strong> (Plus panduan)</li>
+                        <li><strong>Konsultasi 1x</strong> (60 menit via Zoom/Google Meet)</li>
+                        <li><strong>Priority support</strong> (response lebih cepat)</li>
+                    </ul>
+                    <a href="https://wa.me/6285135921324?text=Halo%20Studio%20Belajar.co%2C%20saya%20tertarik%20dengan%20*Paket%20Gold*%20(50%20akses%20-%20Rp%202%2C1%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button" onclick="event.stopPropagation()">Pesan Sekarang</a>
                 </div>
-                <ul class="features-list">
-                    <li>Semua fitur Paket Silver</li>
-                    <li><strong>Custom Branding</strong>  (logo sekolah)</li>
-                    <li><strong>Template Sertifikat Digital</strong>  (Plus panduan)</li>
-                    <li><strong>Konsultasi 1x</strong>  (60 menit via Zoom)</li>
-                    <li><strong>Priority support</strong>  (response lebih cepat)</li>
-                </ul>
-                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Gold*%20(50%20akses%20-%20Rp%201%2C9%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
             </div>
 
             <!-- PLATINUM -->
-            <div class="price-card">
-                <div class="card-header">
-                    <div class="package-name">Paket Platinum</div>
+            <div class="price-card platinum" onclick="toggleCard(this)">
+                <div class="card-mini">
+                    <div class="package-icon">&#128142;</div>
                     <div class="package-title">PLATINUM</div>
-                    <div class="package-subtitle">75 Akses - Ideal untuk Angkatan</div>
+                    <div class="package-access">75 Akses</div>
+                    <div class="mini-price">Rp 3 JT</div>
                 </div>
-                <div class="price-section">
-                    <div class="original-price">Rp 22.500.000</div>
-                    <div class="current-price">Rp 2,6 JT</div>
-                    <div class="price-per-access">Rp 35.000/akses</div>
-                    <div class="discount-badge">HEMAT 88%</div>
+                <div class="card-full">
+                    <div class="full-header">
+                        <div class="full-header-left">
+                            <h2>&#128142; PLATINUM</h2>
+                            <p>75 Akses - Ideal untuk Angkatan</p>
+                        </div>
+                        <button class="close-btn" onclick="event.stopPropagation(); toggleCard(this.closest('.price-card'))">×</button>
+                    </div>
+                    <div class="price-section">
+                        <div class="main-price">Rp 3 JT</div>
+                        <div class="price-details">
+                            <div class="original-price">Rp 26.250.000</div>
+                            <div class="price-per-access">Rp 40.000/akses</div>
+                        </div>
+                        <div class="discount-badge">HEMAT 88,6%</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>Semua fitur Paket Gold</li>
+                        <li><strong>Sertifikat Digital Full Service</strong> (kami yang generate)</li>
+                        <li><strong>Konsultasi 2x</strong> (60 menit/sesi)</li>
+                        <li><strong>Training Penggunaan</strong> (90 menit via zoom)</li>
+                        <li><strong>Grup WA prioritas</strong> (fast response)</li>
+                        <li><strong>Remote installation assistance</strong></li>
+                    </ul>
+                    <a href="https://wa.me/6285135921324?text=Halo%20Studio%20Belajar.co%2C%20saya%20tertarik%20dengan%20*Paket%20Platinum*%20(75%20akses%20-%20Rp%203%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button" onclick="event.stopPropagation()">Pesan Sekarang</a>
                 </div>
-                <ul class="features-list">
-                    <li>Semua fitur Paket Gold</li>
-                    <li><strong>Sertifikat Digital Full Service</strong>  (kami yang generate)</li>
-                    <li><strong>Konsultasi 2x</strong>  (60 menit/sesi)</li>
-                    <li><strong>Training Penggunaan</strong>  (90 menit via zoom)</li>
-                    <li><strong>Grup WA prioritas</strong>  (fast response)</li>
-                    <li><strong>Remote installation assistance</strong></li>
-                </ul>
-                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Platinum*%20(75%20akses%20-%20Rp%202%2C6%20Juta).%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
             </div>
 
             <!-- DIAMOND -->
-            <div class="price-card">
-                <div class="card-header">
-                    <div class="package-name">Paket Diamond</div>
-                    <div class="package-title">&#128142; DIAMOND</div>
-                    <div class="package-subtitle">100 Akses - Paket Terlengkap</div>
+            <div class="price-card diamond" onclick="toggleCard(this)">
+                <div class="card-mini">
+                    <div class="package-icon">&#128160;</div>
+                    <div class="package-title">DIAMOND</div>
+                    <div class="package-access">100 Akses</div>
+                    <div class="mini-price">Rp 3,8 JT</div>
                 </div>
-                <div class="price-section">
-                    <div class="original-price">Rp 30.000.000</div>
-                    <div class="current-price">Rp 3,3 JT</div>
-                    <div class="price-per-access">Rp 33.000/akses</div>
-                    <div class="discount-badge">HEMAT 89%</div>
+                <div class="card-full">
+                    <div class="full-header">
+                        <div class="full-header-left">
+                            <h2>&#128160; DIAMOND</h2>
+                            <p>100 Akses - Paket Terlengkap</p>
+                        </div>
+                        <button class="close-btn" onclick="event.stopPropagation(); toggleCard(this.closest('.price-card'))">×</button>
+                    </div>
+                    <div class="price-section">
+                        <div class="main-price">Rp 3,8 JT</div>
+                        <div class="price-details">
+                            <div class="original-price">Rp 35.000.000</div>
+                            <div class="price-per-access">Rp 38.000/akses</div>
+                        </div>
+                        <div class="discount-badge">HEMAT 89%</div>
+                    </div>
+                    <ul class="features-list">
+                        <li>Semua fitur Paket Platinum</li>
+                        <li><strong>Konsultasi 2x per bulan</strong> (via Zoom)*</li>
+                        <li><strong>Dedicated WhatsApp support</strong> (admin khusus)</li>
+                        <li><strong>On-site installation support</strong> (Surabaya/sekitar)**</li>
+                    </ul>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.5); margin: 15px 0;">
+                        *Konsultasi tambahan: Rp 150k/sesi<br>
+                        **atau remote assistance jika di luar kota
+                    </div>
+                    <a href="https://wa.me/6285135921324?text=Halo%20Studio%20Belajar.co%2C%20saya%20tertarik%20dengan%20*Paket%20Diamond*%20(100%20akses%20-%20Rp%203%2C8%20Juta)%20-%20Paket%20Terlengkap!%20Mohon%20info%20lebih%20lanjut." class="cta-button" onclick="event.stopPropagation()">Pesan Sekarang</a>
                 </div>
-                <ul class="features-list">
-                    <li>Semua fitur Paket Platinum</li>
-                    <li><strong>Konsultasi 3x per bulan</strong>  (via Zoom)*</li>
-                    <li><strong>Dedicated WhatsApp support</strong>  (admin khusus)</li>
-                    <li><strong>On-site installation support</strong>  (Surabaya/sekitar)**</li>
-                </ul>
-                <div style="font-size: 11px; color: #888; margin: 15px 0; line-height: 1.4;">
-                    *Konsultasi tambahan: Rp 150k/sesi<br>
-                    **atau remote assistance jika di luar kota
-                </div>
-                <a href="https://wa.me/6285135921324?text=Halo%20Belajar%20Code%20Studio%2C%20saya%20tertarik%20dengan%20*Paket%20Diamond*%20(100%20akses%20-%20Rp%203%2C3%20Juta)%20-%20Paket%20Terlengkap!%20Mohon%20info%20lebih%20lanjut." class="cta-button">Pesan Sekarang</a>
             </div>
         </div>
 
@@ -406,20 +688,34 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <span>&#128231;</span>
-                    <span><strong>Email:</strong> belajarcodestudio@gmail.com</span>
+                    <span><strong>Email:</strong> studiobelajar.co@gmail.com</span>
                 </div>
                 <div class="contact-item">
                     <span>&#128172;</span>
                     <span><strong>WhatsApp:</strong> +62 851 3592 1324</span>
                 </div>
             </div>
-            <p style="margin-top: 25px; font-size: 14px; opacity: 0.9;">
+            <p style="margin-top: 25px; font-size: 14px; opacity: 0.8;">
                 &#128205; Surabaya, Indonesia | &#9200; Senin-Jumat, 08.00-17.00 WIB
             </p>
-            <p style="margin-top: 15px; font-size: 13px; opacity: 0.8;">
-                Belajar Code Studio - Simulasi UTBK Premium 2026
+            <p style="margin-top: 15px; font-size: 13px; opacity: 0.6;">
+                © 2026 Studio Belajar.co - Simulasi UTBK Premium
             </p>
         </div>
     </div>
+
+    <script>
+        function toggleCard(card) {
+            const allCards = document.querySelectorAll('.price-card');
+            
+            if (card.classList.contains('expanded')) {
+                card.classList.remove('expanded');
+            } else {
+                allCards.forEach(c => c.classList.remove('expanded'));
+                card.classList.add('expanded');
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
 </body>
 </html>
